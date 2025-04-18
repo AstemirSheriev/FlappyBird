@@ -1,11 +1,12 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Random;
 
 
-public class FlappyBird extends JPanel {
+public class FlappyBird extends JPanel implements ActionListener, KeyListener{
 
     //Images
     private Image birdImg;
@@ -22,14 +23,20 @@ public class FlappyBird extends JPanel {
     private int birdY = height / 2;
 
     Bird bird;
-
+    Timer gameLoop;
+    int velocityY = -10;
+    int gravity = 1;
 
     public FlappyBird() {
         setPreferredSize(new Dimension(width, height));
-
+        setFocusable(true);
+        addKeyListener(this);
         loadImages();
 
         bird = new Bird(birdX, birdY, birdImg);
+
+        gameLoop = new Timer(1000/60, this);
+        gameLoop.start();
     }
 
     //load images
@@ -47,9 +54,36 @@ public class FlappyBird extends JPanel {
     }
 
     private void draw(Graphics g) {
+        //background
         g.drawImage(backgroundImg, 0, 0, width, height, null);
-        g.drawImage(birdImg, birdX, birdY, bird.getBirdWidth(), bird.getBirdHeight(), null);
+        //bird
+        g.drawImage(birdImg, bird.birdX, bird.birdY, bird.getBirdWidth(), bird.getBirdHeight(), null);
     }
+
+    public void move() {
+        bird.birdY += velocityY;
+        velocityY += gravity;
+        bird.birdY = Math.max(bird.birdY, 0);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        move();
+        repaint();
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {}
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        if(e.getKeyCode() == KeyEvent.VK_SPACE) {
+            velocityY = -9;
+        }
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {}
 
     class Bird extends JPanel {
         private int birdX;
