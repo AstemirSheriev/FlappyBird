@@ -25,14 +25,6 @@ The objective is to score as many points as possible while avoiding collisions w
 
 ---
 
-## 🎮 How to Play
-
-- Press the **spacebar** to make the bird fly upward.
-- Avoid collisions with pipes.
-- Score points by successfully flying between the pipes.
-
----
-
 ## ✨ Key Features
 
 - **Simple Controls:** Use the spacebar to control the bird.
@@ -45,13 +37,6 @@ The objective is to score as many points as possible while avoiding collisions w
 ## 🛠️ Technologies Used
 
 - **Programming Language:** Java  
-- **Libraries:** *(not specified)*
-
----
-
-## 📄 License
-
-No license information has been specified for this project.
 
 ---
 
